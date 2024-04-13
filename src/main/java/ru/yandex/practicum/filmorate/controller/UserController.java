@@ -26,7 +26,7 @@ public class UserController {
     @PostMapping
     public User createUser(@Valid @RequestBody User user) {
         log.trace("Проверяем выполнение необходимых условий");
-        validation(user);
+        validate(user);
         log.trace("Получаем id пользователя");
         user.setId(getNextId());
         users.put(user.getId(), user);
@@ -37,7 +37,7 @@ public class UserController {
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) {
         log.trace("Проверяем выполнение необходимых условий");
-        validation(user);
+        validate(user);
         if (user.getId() == null) {
             throw new ValidationException("Id должен быть указан");
         }
@@ -59,7 +59,7 @@ public class UserController {
         return ++currentMaxId;
     }
 
-    void validation(User user) {
+    private void validate(User user) {
         if (user.getEmail() == null || user.getEmail().isBlank() || !user.getEmail().contains("@")) {
             throw new ValidationException("Электронная почта должна быть указана");
         }
