@@ -40,7 +40,7 @@ class UserControllerTest {
         User addUser1 = userController.createUser(user1);
         User addUser2 = userController.createUser(user2);
         User addFriend = userController.addFriend(1L, 2L);
-        assertTrue(addFriend.getFriends().contains(2));
+        assertTrue(user1.getFriends().contains(2L));
     }
 
     @Test
