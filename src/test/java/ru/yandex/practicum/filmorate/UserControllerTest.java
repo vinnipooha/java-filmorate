@@ -7,19 +7,40 @@ import ru.yandex.practicum.filmorate.controller.UserController;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.service.UserService;
+import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
 
 import java.time.LocalDate;
 import java.util.Collection;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserControllerTest {
-    UserController userController;
+    private UserController userController;
 
     @BeforeEach
     public void beforeEach() {
-        userController = new UserController();
+        userController = new UserController(new UserService(new InMemoryUserStorage()));
+    }
+
+    @Test
+    void addValidFriend() {
+        User user1 = User.builder()
+                .email("test1@ya.ru")
+                .login("login1")
+                .name("Test Name1")
+                .birthday(LocalDate.of(1980, 1, 1))
+                .build();
+        User user2 = User.builder()
+                .email("test2@ya.ru")
+                .login("login2")
+                .name("Test Name2")
+                .birthday(LocalDate.of(1981, 1, 1))
+                .build();
+        User addUser1 = userController.createUser(user1);
+        User addUser2 = userController.createUser(user2);
+        User addFriend = userController.addFriend(1L, 2L);
+        assertTrue(user1.getFriends().contains(2L));
     }
 
     @Test
