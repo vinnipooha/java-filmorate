@@ -3,7 +3,9 @@ Template repository for Filmorate project.
 
 ##ER-diagram
 
+![img.png](img.png)
 
+````
 Table films {
   film_id int [primary key]
   name varchar(50) 
@@ -28,7 +30,7 @@ Table likes {
 
 Table genres {
   genre_id int [primary key]
-  name varchar (20)
+  name varchar(20)
 }
 
 Table rating_mpa {
@@ -54,3 +56,5 @@ Ref: genres.genre_id < film_genres.genre_id
 Ref: films.film_id < film_genres.film_id
 Ref: users.user_id < friends.user_id
 Ref: users.user_id < friends.friend_id
+
+````
