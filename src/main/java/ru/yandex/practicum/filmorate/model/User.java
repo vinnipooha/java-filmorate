@@ -10,7 +10,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @Data
@@ -28,5 +30,5 @@ public class User {
     @Past
     private LocalDate birthday;
     @Builder.Default
-    private Set<Long> friends = new HashSet<>();
+    private Map<Long, Boolean> friends = new HashMap<>(); //Переписать обработку доавления/удаления друзей на всех слоях
 }

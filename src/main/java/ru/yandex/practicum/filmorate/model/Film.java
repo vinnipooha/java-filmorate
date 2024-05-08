@@ -30,6 +30,10 @@ public class Film {
     private LocalDate releaseDate;
     @Positive
     private int duration;
+    private RatingMPA rating;
     @Builder.Default
     private Set<Long> likes = new HashSet<>();
+    @Builder.Default
+    private Set<Genre> genres = new HashSet<>();
+
 }
